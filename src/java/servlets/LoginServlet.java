@@ -39,23 +39,7 @@ public class LoginServlet extends HttpServlet {
        }
         
         
-       String g ="";
-        try{
-          HttpSession session = request.getSession();
-          g = (String)session.getAttribute("c");
-          if(g.equals(""))
-          {
-//              request.setAttribute("error","u werent logged in"); 
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-          }
-        }
-        catch(NullPointerException e)
-        {
        
-                request.setAttribute("error","u werent logged in"); 
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            
-        }
         if(request.getParameter("home")!=null)
             {
                 HttpSession session = request.getSession();
@@ -99,21 +83,20 @@ public class LoginServlet extends HttpServlet {
         User checkeduser =UserService.login(uncheckeduser);
         if(checkeduser==null)
         {
+               request.setAttribute("u",u);
+               request.setAttribute("p",p);
                 request.setAttribute("error", "I do not recognize you");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
-        else
+        else//LOG IN SUCCESS
         {
             HttpSession session = request.getSession();
-          
             session.setAttribute("c", u);
             
             
-           
            if(request.getParameter("checkers")!=null)
            {//CHECKED
               ck = new Cookie("u",u);
-              
               response.addCookie(ck);
               
            }
