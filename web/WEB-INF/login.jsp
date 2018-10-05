@@ -20,7 +20,7 @@
         <br>
         Password: <input type="password" name="p" value="${p}"></input>
         <br>
-        <input type="checkbox" name="checkers" checked> Remember Me <br>
+        <input type="checkbox" name="checkers" ${check}> Remember Me <br>
         <input type="submit" value="Login" >
         <br>
         

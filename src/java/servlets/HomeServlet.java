@@ -25,35 +25,28 @@ import models.UserService;
  */
 public class HomeServlet extends HttpServlet {
 
-    Cookie ck;
+String g;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        String g ="";
-        try{
+       
+       
           HttpSession session = request.getSession();
-          g = (String)session.getAttribute("c");
-          if(g.equals(""))
+         g=(String) session.getAttribute("c");
+          if(g==null)//NO USER LOGGED IN
           {
 //              request.setAttribute("error","u werent logged in"); 
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+                response.sendRedirect("login");
+              
+                
+                
           }
-        }
-        catch(NullPointerException e)
-        {
-       
-                request.setAttribute("error","u werent logged in"); 
-                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            
-        }
-        
-        
+          else{
          getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-          HttpSession session = request.getSession();
-         session.setAttribute("c", session.getAttribute("c"));
-    
+       
+          }
                    
         
     }
