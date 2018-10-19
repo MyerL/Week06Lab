@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="sait" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,19 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="post" action="login">
+         <sait:login ></sait:login>
+         
         
-        <h1>Remember Me Login Page</h1>
-        <br>
-        Username: <input type="text" name="u" value="${u}"></input>
-        <br>
-        Password: <input type="password" name="p" value="${p}"></input>
-        <br>
-        <input type="checkbox" name="checkers" ${check}> Remember Me <br>
-        <input type="submit" value="Login" >
-        <br>
-        
-        </form>
         ${error}
     </body>
 </html>
